@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Juniper-Binder-Get Tweets</title>
+  
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <div>
+  <h1>Example of using <a href="https://mybinder.org">mybinder.org</a> to get tweets via API</h1>
+  <p>This demo uses <a href="https://github.com/ines/juniper">Juniper</a> library to run code on <a href="https://mybinder.org">mybinder.org</a>. The code uses <a href="https://github.com/DocNow/twarc">twarc</a> to get the latest tweets about a search query, using the Twitter API. </p>
+  <p>The demo is safe for using the API, as it circumvents the cross-origin request limitation of the Twitter API, because of which one cannot directly get the response the Twitter API in browser side javascript code. </p>
+  <p>Another usability issue which I have addressed here is to save the twitter credentials in the client's localStorage, which makes using the page on a refresh much easier. The local storage is also used to save the JSON data returned by the API. This ensures that the page is not making multiple requests to fetch the same data.</p>
+  <h2>Usage</h2>
+  <ul>
+    <li>The data, once fetched, is available in local storage under the key <code>sctg_data</code>. If the data from a previous iteration is available the status line will show its size and search query used.</li>.
+    <li>If no data is present. You need to first enter the details for each of the input boxes using the a <a href="https://developer.twitter.com/en.html">Twitter API</a> Apps credentials page.</li>
+    <li>Then click on the <code>Save credentials</code> button. This will create a code block with the <code>Run</code> button.</li>
+    <li>Click on the <code>Run</code> to run the code for fetching tweets. By default around 500 pages of tweets are fetched. </li>
+    <li>After you see an output as a list of the tweets json, click on <code>Parse output</code>. This saves the data in localStorage.</li>
+    <li>Do whatever you want with the data, by accessing it from the localStorage as <code>const data = JSON.parse(localStorage.getItem("sctg_data"));</code></li>
+    
+  </ul>
+</div>
+<div>
+  <h1>Query data</h1>
+  <p id="dataStatus"></p>
+  search_query <input id="search_query" value="Indian Elections"/><br/>
+consumer_key <input id="consumer_key"/><br/>
+consumer_secret <input id="consumer_secret"/><br/>
+access_token_key <input id="access_token_key"/><br/>
+access_token_secret <input id="access_token_secret"/><br/>
+  <button onclick="updateCode()">Save Credentials</button>
+  <button onclick="parseOutput()">Parse Output</button>
+</div>
+<pre data-executable="true" data-language="python">
+import json
+
+a = {f"{i}": i for i in range(10)}
+print(json.dumps(a))
+</pre>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js'></script>
+<script src='https://cdn.jsdelivr.net/gh/ines/juniper/dist/juniper.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
